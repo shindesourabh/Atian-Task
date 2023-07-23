@@ -1,0 +1,82 @@
+<app-header></app-header>
+
+<section *ngIf="isOpenForm">
+  <div class="container">
+
+    
+    <div *ngIf="isOpenAddtBtn">
+      <h2>Add New Book <span style="display: flex; float: right; margin-right: 20px;">
+          <button (click)="cancelAddForm()">Cancel</button></span></h2>
+    </div>
+    <div *ngIf="isOpenEditBtn">
+      <h2> Update Book <span style="display: flex; float: right; margin-right: 20px;">
+          <button (click)="cancelUpdateForm()">Cancel</button></span></h2>
+    </div>
+
+
+    <form [formGroup]="BookForm">
+      <div class="form-group">
+        <label for="bookId">ID:</label>
+        <input type="number" class="label" formControlName="id" placeholder="Book Id" required>
+      </div>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="title" formControlName="title" placeholder="Book Title" required>
+      </div>
+      <div class="form-group">
+        <label for="author">Author:</label>
+        <input type="text" class="author" formControlName="author" placeholder="Book Author" required>
+      </div>
+      <div class="form-group">
+        <label for="publishedDate">Published Date:</label>
+        <input type="date" class="date" formControlName="date" placeholder="Book Author" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="price" formControlName="price" placeholder="Book Author" required>
+      </div>
+      <div *ngIf="isOpenAddtBtn">
+        <button (click)="SaveChanges()" type="submit">Add Book</button>
+      </div>
+      <div *ngIf="isOpenEditBtn">
+        <button type="submit" (click)="UpdateChanges()">Update</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section *ngIf="isOpenList">
+  <div>
+    <h2>Book List <span style="display: flex; float: right; margin-right: 20px;">
+        <button (click)="addNewBookForm()">Add New Books</button></span></h2>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Book_id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books let i = index ">
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.date | date }}</td>
+            <td>{{ book.price | currency:'INR' }}</td>
+            <td>
+              <button (click)="deleteBook(i)" class="btn btn-danger" style="margin-right: 10px;">Delete</button>
+            </td>
+            <td (click)="RowSelected(i)">
+              <button class="btn btn-danger" (click)="RowSelected(i)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

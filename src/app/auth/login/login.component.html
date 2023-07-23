@@ -1,0 +1,26 @@
+<div class="loging form ">
+    <div class="container">
+        <h2>Login</h2>
+        <form [formGroup]="loginform" (ngSubmit)="LogIn()">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="Email" placeholder="Enter your email"
+                    [ngClass]="{ 'is-invalid':!loginform.get('Email')?.valid}" required>
+                <div *ngIf="submitted && loginform.get('Email')?.errors?.['required']" class="text-danger"> *This is
+                    required </div>
+                <div *ngIf="submitted && loginform.get('Email')?.errors?.['pattern']" class="text-danger"> *Email Is Not
+                    Valid </div>
+
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" formControlName="Password" placeholder="Password" required>
+                <div *ngIf="submitted && loginform.get('Password')?.value === '' && loginform.get('Password')?.errors?.['required']"
+                    style="color:red"> *This is required</div>
+                <div *ngIf="submitted &&  isInvalidPassword" class="text-danger">Please enter the correct password.
+                </div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
