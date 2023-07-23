@@ -49,6 +49,7 @@ export class BookListComponent implements OnInit {
         this.books.push(this.BookForm.value);
         this.BookForm.reset();
         this.isOpenList = true;
+        this.isOpenForm = false;
         this.saveBooksToLocalStorage();
         this.resetForm()
       }
@@ -60,7 +61,6 @@ export class BookListComponent implements OnInit {
   SaveChanges(): void {
     debugger
     this.addBook(); // Save changes using the same addBook method
-    this.isOpenForm = false;
   }
 
   deleteBook(index: number): void {
